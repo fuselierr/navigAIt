@@ -51,14 +51,6 @@ app.post('/pdf-upload', upload.single('pdf'), (req, res) => {
     });
 })
 
-// Get input audio from employee/user
-app.post('/audio-upload', (req, res) => {
-    if (!req.file) {
-        return res.status(400).json({ message: 'No audio file present' });
-    }
-    res.json({ message: 'Audio file received', filePath: req.file.path });
-})
-
 // Send tts response from llm
 app.get('/send-audio', (req, res) => {
     const filePath = NULL;
@@ -68,6 +60,14 @@ app.get('/send-audio', (req, res) => {
         res.status(400).json({ message: 'No audio file present' });
     }
     res.json({ message: 'Audio file received' });
+})
+
+// Receive and process screenshots from client
+app.post('/screenshots', upload.single('screenshot'), (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({ message: 'No screenshot file present' });
+    }
+    res.json({ message: 'Screenshot file received', filePath: req.file.path });
 })
 
 // Start AI assistance protocol
