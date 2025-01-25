@@ -12,15 +12,14 @@
     <button type="button" onclick="uploadPDF()">Upload PDF</button>
   </form>
 
-  <h1>Test Audio Upload</h1>
-  <form id="audioForm" enctype="multipart/form-data">
-    <input type="file" id="audioFile" name="audio" accept="audio/*">
-    <button type="button" onclick="uploadAudio()">Upload Audio</button>
-  </form>
-
   <h1>Start AI Assistance</h1>
   <button id="startAssistance" onclick="startAI()">Start AI Assistance</button>
   <button id="stopAssistance" onclick="stopAI()" disabled>Stop AI Assistance</button>
+
+  <h1>Upload screenshot</h1>
+    <form id="screenshotForm" enctype="multipart/form-data">
+        <input type="file" id="screenshotFile" name="screenshot" accept=".png">
+        <button type="button" onclick="uploadScreenshot()">Upload Screenshot</button>
 
   <script>
     let socket;
@@ -46,30 +45,6 @@
         alert(`Response: ${JSON.stringify(result)}`);
       } catch (error) {
         console.error('Error uploading PDF:', error);
-      }
-    };
-
-    const uploadAudio = async () => {
-      const formData = new FormData();
-      const file = document.getElementById('audioFile').files[0];
-
-      if (!file) {
-        alert('Please select an audio file!');
-        return;
-      }
-
-      formData.append('audio', file);
-
-      try {
-        const response = await fetch('http://localhost:3001/audio-upload', {
-          method: 'POST',
-          body: formData,
-        });
-
-        const result = await response.json();
-        alert(`Response: ${JSON.stringify(result)}`);
-      } catch (error) {
-        console.error('Error uploading audio:', error);
       }
     };
     const startAI = async () => {
@@ -113,6 +88,30 @@
       document.getElementById('startAssistance').disabled = false;
       document.getElementById('stopAssistance').disabled = true;
     };
+
+    const uploadScreenshot = async () => {
+      try {
+        const formData = new FormData();
+        const file = document.getElementById('screenshotFile').files[0];
+
+        if (!file) {
+          alert('Please select a screenshot file!');
+          return;
+        }
+
+        formData.append('screenshot', file);
+
+        const response = await fetch('http://localhost:3001/screenshots', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const result = await response.json();
+        alert(`Response: ${JSON.stringify(result)}`);
+      } catch (error) {
+        console.error('Error uploading screenshot:', error);
+      }
+    }
   </script>
 </body>
 </html>
