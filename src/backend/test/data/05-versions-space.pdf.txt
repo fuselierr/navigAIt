@@ -1,0 +1,501 @@
+
+
+ 
+ 
+ 
+A Brighter Future for the 
+Generation of Tomorrow 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Written by:  
+Douglas Tisdale 
+Jonathan Wang 
+Shawn Gan 
+Priota Hassan 
+ 
+
+A Brighter Future for the Generation of Tomorrow, Geesehack 2025              2 
+This case study is hypothetical and based on publicly available information research by Geesehacks.  
+It was developed for competition purposes only. 
+ 
+A Note From the Authors 
+ 
+Firstly, thank you for providing your time to participate in this case! We hope that you 
+are as excited as us to get started. This case was written by and produced by Geesehack staff and 
+in no way reflects the true situation of Sun Life. Please keep this in mind while completing the 
+case.  
+ 
+While we are not executives of Sun Life, we have drawn insight from past case 
+competitions, hackathons, communication with Sun Life staff and even had work experience at 
+Sun Life to design and perfect this case.  
+ 
+We encourage the use of all tools available to you to find a solution to this case including 
+but not limited to: all coding software, photoshop, AI (although we will remove points if AI has 
+been used to a noticeably significant capacity and without creativity) and anything else that you 
+may to aid you on your journey. 
+ 
+If you run into any issues during the case, whether it be personal or case related, please 
+do not hesitate to reach out to any of our staff. We will be in the area to assist you. Additionally 
+for private inquiries, please reach out to our support staff (more information will be provided by 
+the organizers regarding this). 
+ 
+ Unlike many other hackathons, you will have to think of solutions that address the key 
+root of the problem being asked, and then think of solutions to address that problem. Despite this 
+limitation, we encourage uniqueness, flashy ideas and your pitch abilities to create the best 
+solution so make sure that you are brainstorming the best solutions and keep your ideas and 
+information private! Disputes between teams are up to the judgement of the organizers. 
+ 
+If you were kind enough to read this far, we’ll give you a small hint on where we would 
+start our research. ETFs are drastically increasing in popularity, especially among younger 
+generations. Maybe consider what makes them so attractive over other tools such as mutual 
+funds, bonds or derivatives? Are there any pain points with commonly used investments, for both 
+companies and individuals?  Without further ado, we’ll let you get started! 
+ 
+Good luck from the case writing team, Douglas, Shawn, Jonathan and Priota 
+Douglas Tisdale, Shawn Gan, Jonathan Wang, Priota Hassan 
+
+A Brighter Future for the Generation of Tomorrow, Geesehack 2025              3 
+Current Situation: 
+ 
+ With Gen Z (1997 to 2012) and Gen Alpha (2010 to 2024) beginning to enter/complete 
+higher education, they are now brought to a valuable question: How can we ensure that we are 
+not only able to attract youth from being a client of Sun Life, while also ensuring we retain and 
+engage them? Additionally, it is important for Sun Life to be providing value for its clients so 
+how can we help Sun Life clients take care of their financial wellbeing? 
+ 
+In today’s day and age, younger generations are beginning to exert their spending 
+potential. With a current spending power of 860 billion dollars as of 2024 and potentially up to 
+12 trillion dollars within the next 6 years, it is crucial for Sun Life to target this new generation. 
+A couple of trends have been identified among youth. A digital presence is a must as current 
+youth are considered to be incredibly tech-savvy. Social media is a dominating presence in the 
+technical space and could open up marketing opportunities. Additionally, there has been an 
+increased emphasis on the implementation of user-generated content (UGC) solutions. While not 
+all great solutions need to play to one of these, or another trend, a sound marketing plan likely 
+would determine the difference between success and failure.  
+ 
+Time is running out as each year, Gen Z and Gen Alpha are one step closer to the adult 
+stage of life. How and with what can we target these new potential clients in a way that ensures 
+increases in capture rates, and loyalty while also providing value to this new demographic? 
+Remember, your solution must not only be viable and built out but also needs to be defensible 
+using real-world data and market data. (See the rubric in the appendix for more information) 
+ 
+ 
+Who is Sun Life: 
+ 
+“At Sun Life, our Purpose is clear: to help our clients achieve lifetime financial security and live 
+healthier lives.” - Sun Life 
+ 
+Sun Life (Ticker SLF.TO) is committed to providing value to millions of people across Canada, 
+and its other global locations. Whether it be aiding small companies, helping individuals build 
+their savings or providing a financially safe haven, Sun Life is there to help. 
+ 
+A Brief History 
+ 
+In 1865, Mathew Hamilton Gault created a new firm in Montreal with the goal of 
+developing an insurance firm in Canada. Sun Life fell into some troubles with the Great 
+Depression in the 1930s but used the recovery as a new chance to expand assets and grow. 
+Despite facing a variety of global challenges, they managed to remain profitable and expand to 
+Douglas Tisdale, Shawn Gan, Jonathan Wang, Priota Hassan 
+
+A Brighter Future for the Generation of Tomorrow, Geesehack 2025              4 
+it’s current state. By 2015, Sun Life celebrated it’s 150th anniversary showcasing the financial 
+stability of the firm. By 2024, Sun Life is a global corporation acting in a wide variety of 
+countries. With a market capitalization of 50 billion CAD and over 50,000 employees 
+worldwide, Sun Life is one of the largest companies in Canada, let alone the world. Now, Sun 
+Life is looking for further expansion abilities in a new era, especially with the usage of 
+technology and digital services.  
+ 
+Core Values: 
+● Integrity 
+● Client Focus 
+● Excellence 
+● Engagement 
+● Innovation 
+ 
+Sun Life Status: 
+Sun Life, is a leading international financial organization that provides asset 
+management, wealth, insurance and health solutions for individual and institutional clients in 
+countries such as but not limited to the United States, the United Kingdom, Ireland, Hong Kong, 
+the Philippines, Japan, Indonesia, India, China, Australia, Singapore, Vietnam, Malaysia and 
+Bermuda. 
+ 
+Sun Life currently holds a market capitalization of 50.77 billion CAD, with over 1.51 CAD 
+trillion AUM, and its income primarily comes from wealth and asset management, group health 
+and protection, and individual protection.  
+ 
+A Leading Company Everywhere 
+Asset Management at Sun Life was a global leader in public and alternative asset classes 
+through MFS and  SLC, while also being a leader in Canada for health, wealth and insurance, a 
+leader in U.S for health and benefits, and a regional leader in Asia for fast-growing markets.  
+ 
+Competition 
+Insurance is a fairly concentrated business with a multitude of different companies 
+spanning across a variety of different types of insurance including but not limited to life 
+insurance, health insurance, auto insurance and house insurance.  
+ 
+Sun Life focuses in on 3 areas of insurance, these being: life insurance, health insurance 
+and disability insurance. While there are many insurance companies occupying in this space, we 
+will focus on a couple of the larger firms. In addition to their insurance division, they also have 
+taken a foothold into being a dominant player in the asset management and financial advisory 
+industry.  
+Douglas Tisdale, Shawn Gan, Jonathan Wang, Priota Hassan 
+
+A Brighter Future for the Generation of Tomorrow, Geesehack 2025              5 
+ 
+● Manulife: Manulife Financial Corporation (ticker MFC.TO)  is a leading Canadian 
+multinational insurance and financial services company headquartered in Toronto, 
+Ontario. Manulife was established in 1887 making it slightly younger than Sun Life, and 
+it provides a range of services, including life insurance, health insurance, wealth and asset 
+management, and financial advisory (likewise to Sun Life). Manulife operates globally, 
+with key markets in Canada, the United States (under the John Hancock brand), and Asia. 
+It focuses on helping individuals and businesses achieve financial security and wellness. 
+● Royal Bank of Canada: While not necessarily known for their insurance as well as they 
+are known for being the largest commercial bank Canada (ranked 11th in the world by 
+marker capitalization), they are still a major player in the insurance and financial 
+industries. The Royal Bank of Canada (RBC) is one of Canada’s largest and oldest 
+financial institutions, also headquartered in Toronto, Ontario <<aside: you may have 
+noticed a trend with this>>. Established in 1864 as the third oldest big 5 bank behing 
+Bank of Montreal and Bank of Nova Scotia, RBC offers a wide range of financial 
+services, including banking, wealth management, capital markets, and insurance. RBC 
+Insurance provides various insurance products, including life, health, travel, home, auto, 
+and business insurance. It focuses on delivering personalized coverage options to 
+individuals and businesses, helping clients protect their assets and plan for the future. 
+● Desjardins Group: Desjardins Group is the largest federation of credit unions in North 
+America, headquartered in Lévis, Quebec. Founded in 1900, it operates as a cooperative 
+financial institution, offering a wide range of services, including banking, wealth 
+management, insurance, and investment products. Desjardins Insurance provides 
+comprehensive coverage options, including life, health, auto, home, and business 
+insurance. Its focus is on personalized, member-driven solutions to meet the needs of 
+individuals and businesses while promoting financial security and cooperative values. 
+ 
+ 
+Giving Solutions to Everyone 
+Due to the wide breadth of services that Sun Life offers, the company is in a unique 
+position to be able to serve almost any individual or group on anything from insurance, group 
+health benefits or wealth and asset management.  
+ 
+ From the adults, to families, to enterprises to investors, Sun Life is in a unique position to 
+be able to offer many different solutions to cater to each parties need. To meet this, Sun Life has 
+focused on trying to get more solutions quicker to clients, such as in the U.S and Asian markets, 
+and making access to knowledge easier such as the MyRetirement Income for retiring Canadians 
+and the acquisition of InfraRed Capital Partners to help continue investments in early stage 
+companies. 
+ 
+Douglas Tisdale, Shawn Gan, Jonathan Wang, Priota Hassan 
+
+A Brighter Future for the Generation of Tomorrow, Geesehack 2025              6 
+Sun Life is looking for new ways to help continue serving its wide variety of customers 
+better as well as new solutions to help the newer demographics, like Gen Z that are entering the 
+workforce and the issues that uniquely face the younger generation.  
+ 
+ 
+Products: 
+As the largest financial services company in Canada, Sun Life offers a wide array of 
+products and services such as Insurance, Investments, Financial Advising, and Asset 
+Management. In addition, they have also rolled out a digital app to enhance and expedite the 
+insurance process. Below is a more in depth description of each product: 
+ 
+Insurance 
+Sun Life Financial's insurance division offers a wide range of products designed to help 
+individuals, families, and businesses achieve financial security. These products include life 
+insurance (term, whole, and universal), health and dental insurance, critical illness insurance, 
+disability insurance, and group benefits for businesses. 
+ 
+The division focuses on providing tailored solutions to meet diverse client needs, 
+supporting both short-term protection and long-term financial planning. Operating globally, Sun 
+Life's insurance services are a key part of its mission to help clients achieve lifetime financial 
+confidence and well-being. 
+ 
+Perhaps what Sun Life is best known for, there are two main products within insurance 
+that Sun Life focuses on: life insurance and health insurance. Life insurance provides a payment 
+to the policy holder’s beneficiaries, ensuring financial security in the event of death. On the other 
+hand, health insurance looks to protect the policyholder from the financial impact caused by 
+illness, accidents, or disability. 
+ 
+Investments 
+Sun Life Financial's investments division focuses on providing a broad range of asset 
+management and investment solutions to individuals, businesses, and institutions. Through its 
+subsidiary, Sun Life Global Investments, and its majority-owned affiliate, MFS Investment 
+Management, the division offers access to mutual funds, segregated funds, pension plans, and 
+customized portfolio solutions. 
+ 
+The division emphasizes sustainable investing, incorporating environmental, social, and 
+governance (ESG) factors into its strategies. Its goal is to help clients grow and protect their 
+wealth while aligning with long-term financial objectives. Sun Life's investment offerings 
+support retirement savings, income generation, and overall wealth management.  
+ 
+Douglas Tisdale, Shawn Gan, Jonathan Wang, Priota Hassan 
+
+A Brighter Future for the Generation of Tomorrow, Geesehack 2025              7 
+Financial Advising 
+To help its clients navigate and plan for their financial future, Sun Life offers a variety of 
+financial advising services through its force of advisors, agents, and consultants. This group of 
+people aim to help Sun Life's customers navigate the future, prevent hard financial times and 
+prepare for retirement. While the younger generations are often not yet planning for retirement, 
+according to recent trends, Gen Z is taking a higher initiative to invest into their futures. In fact, 
+according to a recent study by TD, Gen Z is out-investing all other generations with 68% of 
+respondents reporting saving for their future, thus proving the need to target this demographic 
+with financial products. In addition, there are many financial planning tools offered through the 
+company’s app that are useful for aiding a customer's plan for their future. We would advise 
+taking a brief look through this page and exploring the types of readily available content that Sun 
+Life has to offer (it can be found both on the app store and google play store). The goal of these 
+services is to assist people in reaching their financial goals by selecting the right mix of 
+investment and insurance products allowing them to navigate financial downturn while 
+accumulating more wealth as time progresses.  
+ 
+ 
+Asset Management 
+Sun Life Financial Inc. is Canada's largest asset manager, overseeing approximately 
+$1.52 trillion in assets as of September 30, 2024.  Its asset management operations are primarily 
+conducted through two subsidiaries: 
+ 
+1. MFS Investment Management: Founded a century ago, MFS serves individual and 
+institutional investors globally. Despite managing substantial assets, MFS has faced net outflows 
+due to market trends favoring high-growth tech stocks and exchange-traded funds (ETFs). In 
+response, MFS plans to launch five actively managed ETFs in December 2024 to align with 
+investor preferences.  
+ 
+2. SLC Management: This division caters to institutional clients worldwide, offering 
+expertise in fixed income, liability-driven investing, and alternative asset classes, including real 
+estate and infrastructure equity. SLC Management comprises four specialty managers: 
+ 
+● SLC Fixed Income: One of North America's largest investment-grade fixed income 
+investors. 
+● BentallGreenOak: A global real estate investment management advisor. 
+● InfraRed: An international investment manager focused on infrastructure. 
+● Crescent Capital Group: A global alternative credit investment manager specializing in 
+various credit strategies.  
+ 
+ 
+Douglas Tisdale, Shawn Gan, Jonathan Wang, Priota Hassan 
+
+A Brighter Future for the Generation of Tomorrow, Geesehack 2025              8 
+Sun Life's asset management business continues to adapt to market dynamics, expanding 
+its product offerings and maintaining a strong global presence. 
+ 
+Sun Life Digital Services 
+Available online or via their mobile app, the Sun Life’s digital services allow clients to 
+access information regarding their policies, their investments, or book meetings with advisors. In 
+addition, as mentioned before the app also contains various financial planning tools such as a 
+retirement calculator.  
+ 
+External Environment 
+Sun Life Financial operates in a highly competitive and dynamic financial services and 
+insurance industry, facing challenges from well-established players and emerging disruptors. Its 
+competitors span across life insurance, wealth management, and retirement services, both within 
+Canada and internationally. 
+ 
+Key Domestic Competitors 
+As mentioned in the competition section, in the Canadian market, Sun Life’s primary 
+competitors include Manulife Financial, Great-West Lifeco, and Industrial Alliance. Manulife, 
+Canada’s largest insurer, offers a wide range of financial services, including life insurance, 
+wealth management, and retirement solutions, often mirroring Sun Life’s portfolio. Manulife’s 
+strong global presence, especially in Asia, positions it as a formidable competitor in markets that 
+Sun Life is also targeting for growth. Similarly, Great-West Lifeco has diversified its offerings 
+through subsidiaries like Canada Life and Putnam Investments, focusing on group insurance, 
+asset management, and retirement products. Industrial Alliance, while smaller, competes through 
+its regional focus and personalized service offerings, appealing to niche markets in Canada.  
+ 
+Global Competitors 
+On the global stage, Sun Life competes with multinational giants like Prudential 
+Financial, MetLife, and AIA Group. Prudential and MetLife dominate the U.S. insurance market 
+and have extensive operations in Europe and Asia, leveraging their scale and brand recognition. 
+These firms also invest heavily in technology and alternative asset management, similar to Sun 
+Life’s recent strategies. AIA Group, based in Hong Kong, has a commanding presence in Asia, 
+where Sun Life is focusing much of its expansion efforts. AIA’s deep market knowledge and 
+local partnerships give it a competitive advantage in the region. 
+ 
+Emerging Threats 
+Sun Life also faces growing competition from InsurTech startups and digital-first 
+companies entering the insurance and wealth management sectors. Firms like Lemonade and 
+Policygenius are disrupting traditional models with data-driven algorithms, AI-powered 
+platforms, and customer-centric services. These companies appeal particularly to younger, 
+Douglas Tisdale, Shawn Gan, Jonathan Wang, Priota Hassan 
+
+A Brighter Future for the Generation of Tomorrow, Geesehack 2025              9 
+tech-savvy demographics who value convenience and transparency. In this competitive 
+environment, What can Sun Life look into in order to maximize its reach with Gen Z as they 
+continue to enter the workforce? 
+ 
+Other Considerations 
+With the growth of digital currencies since 2008, and other alternative currencies, new 
+technologies have arised that have found their place within the insurance and wealth 
+management industry. For example, Sun Life partnered with blockchain technology SecuredKey 
+in  2018 to help make the verification process for users quicker and faster. With technologies 
+rising at every corner, there are always both opportunities and threats to explore and consider for 
+Sun Life. Consider what unexplored applications of both popular and niche technologies there 
+are. 
+ 
+Conclusion 
+Sun Life is looking to capture new audiences, and you and your team are the key to new 
+innovation. Whether this be a new avenue for growth, an expansion of a current offering, a 
+quality of life function or anything that your mind can come up with, we are looking for you to 
+build a solution to the new youth demographic. How should Sun Life proceed to ensure success 
+for the future? 
+ 
+Douglas Tisdale, Shawn Gan, Jonathan Wang, Priota Hassan 
+
+A Brighter Future for the Generation of Tomorrow, Geesehack 2025              10 
+Rubric Guidelines 
+ 
+To create more value, a solution should have all of the following. An approximate weighting is 
+provided to demonstrate how we would allocate presentation time and emphasis. All 
+discrepancies in judgement lie with regard to the judge. Judgement is not representative of the 
+case writers and a Judge’s decision is final. 
+ 
+ 
+Section Requirement  Weighting (%) 
+Product  60 
+ Creativity 20 
+ Functionality and Design 20 
+ Analysis 15 
+ Impact  5 
+Feasibility  20 
+ Implementation plan 10 
+ Risks and mitigations 5 
+ Financial breakdown and projection 5 
+Pitch  20 
+ Slides 5 
+ Spoken skills 15 
+Total  100 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+For more clarity, please ask a volunteer 
+ 
+Douglas Tisdale, Shawn Gan, Jonathan Wang, Priota Hassan 
+
+A Brighter Future for the Generation of Tomorrow, Geesehack 2025              11 
+Exhibits 
+ 
+Exhibit A - Financial Operational Highlights Q3 2024 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Douglas Tisdale, Shawn Gan, Jonathan Wang, Priota Hassan 
+
+A Brighter Future for the Generation of Tomorrow, Geesehack 2025              12 
+Exhibit B - Cash and other liquid assets as of 30 September 2024 
+ 
+ 
+Douglas Tisdale, Shawn Gan, Jonathan Wang, Priota Hassan 
+
+A Brighter Future for the Generation of Tomorrow, Geesehack 2025              13 
+Exhibit C - Premium Rates 
+ 
+Douglas Tisdale, Shawn Gan, Jonathan Wang, Priota Hassan 
+
+A Brighter Future for the Generation of Tomorrow, Geesehack 2025              14 
+ 
+ 
+ 
+Douglas Tisdale, Shawn Gan, Jonathan Wang, Priota Hassan 
+
+A Brighter Future for the Generation of Tomorrow, Geesehack 2025              15 
+Exhibit D - Logo, Branding and Primary Colour Palettes 
+ 
+ 
+ 
+Primary Colour Palette:  
+ 
+Hex #ecac04 
+RGB: rgb(236,172,4) 
+ 
+Hex: #043c48 
+RGB: rgb(4,60,72) 
+Sample Website Design 
+ 
+ 
+Douglas Tisdale, Shawn Gan, Jonathan Wang, Priota Hassan 
+
+A Brighter Future for the Generation of Tomorrow, Geesehack 2025              16 
+Exhibit E - Sun Life Core Principles 
+ 
+ 
+ 
+Douglas Tisdale, Shawn Gan, Jonathan Wang, Priota Hassan 
+
+A Brighter Future for the Generation of Tomorrow, Geesehack 2025              17 
+References 
+ 
+Team Mediatool. (2024, November 13). Gen Z Trends 2025: What Marketers Need to Know. 
+Mediatool. https://mediatool.com/blog/gen-z-trends 
+Who we are. (2025). Sunlife.ca. 
+https://www.sunlife.ca/en/about-us/who-we-are/#:~:text=Sun%20Life%20is%20there%2
+0to,wellness%20programs%20%E2%80%93%20and%20retirement%20options 
+ Sun Life Financial. (n.d.). 
+https://www.sunlife.com/content/dam/sunlife/regional/global-marketing/documents/com/
+pa_e_History_of_SLF.pdf  
+Sun Life Financial (SLF) - Market capitalization. (2025). Companiesmarketcap.com. 
+https://companiesmarketcap.com/cad/sun-life-financial/marketcap/ 
+ Largest banks and bank holding companies by market cap. (2024). Companiesmarketcap.com. 
+https://companiesmarketcap.com/cad/banks/largest-banks-by-market-cap 
+Sun Life Financial. (n.d.-a). 
+https://www.sunlife.com/content/dam/sunlife/regional/global-marketing/documents/com/
+pa_e_History_of_SLF.pdf  
+Insurance. (2023). Sunlife.com. https://www.sunlife.com/en/products-and-services/insurance/ 
+Get to know mysunlife.ca and the my sun life mobile app. (n.d.-a). 
+https://www.sunlife.ca/content/dam/sunlife/regional/canada/documents/grs/client-web-m
+obile-flyer-e.pdf  
+Douglas Tisdale, Shawn Gan, Jonathan Wang, Priota Hassan 
+
+A Brighter Future for the Generation of Tomorrow, Geesehack 2025              18 
+Louis, S. (2024, November 14). More gen-Z Canadians regularly investing than other 
+generations: TD survey. Financialpost; Financial Post. 
+https://financialpost.com/wealth/smart-money/gen-z-investing-other-generations-td-surve
+y 
+Press, T. C. (2024, November 5). Sun Life managing record assets of over $1.5 trillion despite 
+outflow challenges. BNN Bloomberg. 
+https://www.bnnbloomberg.ca/business/company-news/2024/11/05/sun-life-managing-re
+cord-assets-of-over-15-trillion-despite-outflow-challenges/ 
+ Sun Life Financial Inc Peers & Key Competitors - GlobalData. (2021). Globaldata.com. 
+https://www.globaldata.com/company-profile/sun-life-financial-inc/competitors/ 
+News releases. (2023). Sunlife.com. 
+https://www.sunlife.com/en/newsroom/news-releases/announcement/sun-life-announces-
+another-industry-first-and-joins-forces-with-a-leader-in-blockchain-technologies/123157/ 
+Monthly premium rates. (n.d.-b). 
+https://www.sunlife.ca/content/dam/sunlife/regional/canada/documents/gb/cdha-plan-rate
+s-en.pdf  
+Sun Life reports third quarter 2024 results. (n.d.-d). 
+https://www.sunlife.com/content/dam/sunlife/regional/global-marketing/documents/com/
+pa-e-q324-earnings.pdf  
+Douglas Tisdale, Shawn Gan, Jonathan Wang, Priota Hassan 
+
+A Brighter Future for the Generation of Tomorrow, Geesehack 2025              19 
+News releases. (2023). Sunlife.com. 
+https://www.sunlife.com/en/newsroom/news-releases/announcement/sun-life-announces-
+another-industry-first-and-joins-forces-with-a-leader-in-blockchain-technologies/123157/ 
+Sun Life. (2024). Sunlife.ca. https://www.sunlife.ca/en/ 
+  
+ 
+Douglas Tisdale, Shawn Gan, Jonathan Wang, Priota Hassan 

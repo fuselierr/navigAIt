@@ -18,7 +18,13 @@
     <button type="button" onclick="uploadAudio()">Upload Audio</button>
   </form>
 
+  <h1>Start AI Assistance</h1>
+  <button id="startAssistance" onclick="startAI()">Start AI Assistance</button>
+  <button id="stopAssistance" onclick="stopAI()" disabled>Stop AI Assistance</button>
+
   <script>
+    let socket;
+
     const uploadPDF = async () => {
       const formData = new FormData();
       const file = document.getElementById('pdfFile').files[0];
@@ -66,6 +72,50 @@
         console.error('Error uploading audio:', error);
       }
     };
+    const startAI = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/start-assistance', {
+          method: 'POST',
+        });
+
+        const result = await response.json();
+        alert(`Response: ${JSON.stringify(result)}`);
+
+        // Establish a Socket.io connection after starting AI assistance
+        socket = io('http://localhost:3001');
+
+        socket.on('connect', () => {
+          console.log('Connected to the server for AI assistance');
+          alert('Socket.io connection established');
+        });
+
+        // Send dummy audio data for testing
+        const audioData = new Blob(['Test audio chunk']);
+        socket.emit('audio', audioData);
+
+        socket.on('disconnect', () => {
+          console.log('Disconnected from the server');
+          alert('Socket.io connection closed');
+        });
+
+        document.getElementById('startAssistance').disabled = true;
+        document.getElementById('stopAssistance').disabled = false;
+      } catch (error) {
+        console.error('Error starting AI assistance:', error);
+      }
+    };
+
+    const stopAI = () => {
+      if (socket) {
+        socket.disconnect();
+        alert('Socket.io connection closed');
+      }
+      document.getElementById('startAssistance').disabled = false;
+      document.getElementById('stopAssistance').disabled = true;
+    };
+  </script>
+</body>
+</html>
   </script>
 </body>
 </html>
