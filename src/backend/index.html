@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test POST Endpoints</title>
+</head>
+<body>
+  <h1>Test PDF Upload</h1>
+  <form id="pdfForm" enctype="multipart/form-data">
+    <input type="file" id="pdfFile" name="pdf" accept=".pdf">
+    <button type="button" onclick="uploadPDF()">Upload PDF</button>
+  </form>
+
+  <h1>Test Audio Upload</h1>
+  <form id="audioForm" enctype="multipart/form-data">
+    <input type="file" id="audioFile" name="audio" accept="audio/*">
+    <button type="button" onclick="uploadAudio()">Upload Audio</button>
+  </form>
+
+  <script>
+    const uploadPDF = async () => {
+      const formData = new FormData();
+      const file = document.getElementById('pdfFile').files[0];
+
+      if (!file) {
+        alert('Please select a PDF file!');
+        return;
+      }
+
+      formData.append('pdf', file);
+
+      try {
+        const response = await fetch('http://localhost:3001/pdf-upload', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const result = await response.json();
+        alert(`Response: ${JSON.stringify(result)}`);
+      } catch (error) {
+        console.error('Error uploading PDF:', error);
+      }
+    };
+
+    const uploadAudio = async () => {
+      const formData = new FormData();
+      const file = document.getElementById('audioFile').files[0];
+
+      if (!file) {
+        alert('Please select an audio file!');
+        return;
+      }
+
+      formData.append('audio', file);
+
+      try {
+        const response = await fetch('http://localhost:3001/audio-upload', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const result = await response.json();
+        alert(`Response: ${JSON.stringify(result)}`);
+      } catch (error) {
+        console.error('Error uploading audio:', error);
+      }
+    };
+  </script>
+</body>
+</html>
