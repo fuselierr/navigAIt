@@ -73,10 +73,26 @@ async function convertImageToBase64() {
     }
 }
 
+const filePath = path.join(process.cwd(), 'uploads', 'combined.txt');
 
-import { textFromPDF } from './utils.js';
+fs.readFile(filePath, 'utf-8', (err, data) => {
+  if (err) {
+    console.error('Error reading the file:', err);
+  } else {
+    const pdfText = data; 
+  }
+});
 
-const pdfText = await textFromPDF('./uploads/onboarding.pdf');
+async function readFileContent() {
+  try {
+    const data = await fs.readFile(filePath, 'utf-8');
+    const pdfText = data;
+    return pdfText;
+  } catch (error) {
+    console.error('Error reading file content:', error);
+    throw error;
+  }
+}
 
 import { exec } from 'child_process';
 
@@ -103,7 +119,7 @@ const speechCallback = async (stream) => {
         imageBase64: await convertImageToBase64(), // Convert image to Base64
         question: stream.results[0].alternatives[0].transcript,
         startNew: initialPrompt,
-        pdfText: pdfText,
+        pdfText: await readFileContent(),
       });
 
       if (initialPrompt) {
@@ -249,9 +265,19 @@ function startRecording() {
 }
 
 function stopRecording() {
+  if (recognizeStream) {
+    recognizeStream.end();
+    recognizeStream.removeListener('data', speechCallback);
+    recognizeStream = null;
+  }
+  if (resultEndTime > 0) {
+    finalRequestEndTime = isFinalEndTime;
+  }
+  resultEndTime = 0;
+
+  lastAudioInput = [];
+  lastAudioInput = audioInput;
     console.log('Audio recording stopped');
 }
-
-startRecording();
 
 export { startRecording, stopRecording };

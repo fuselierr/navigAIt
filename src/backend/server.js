@@ -3,13 +3,11 @@ import cors from 'cors';
 import multer from 'multer';
 import { textFromPDF, primeText, takeScreenshot, deletePDFs, combineFiles } from './utils.js';
 import fs from 'fs';
-import http from 'http';
 import path from 'path';
-//import { startRecording, stopRecording } from './stream.js';
+import { startRecording, stopRecording } from './stream.js';
 
 const PORT = 3001;
 const app = express();
-const server = http.createServer(app);
 
 let latestMessage = "";
 
@@ -98,12 +96,12 @@ app.get('/send-text', (req, res) => {
 })
 
 app.post('/transcription', (req, res) => {
-    //startRecording();
-    //setInterval(takeScreenshot, 1000);
+    startRecording();
+    setInterval(takeScreenshot, 1000);
     res.json({ message: 'Transcription received' });
 })
 
 app.post('/stop-transcription', (req, res) => {
-    //stopRecording();
+    stopRecording();
     res.json({ message: 'Transcription stopped' });
 })

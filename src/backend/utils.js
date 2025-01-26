@@ -17,11 +17,19 @@ function deletePDFs() {
     const files = fs.readdirSync(directoryPath);
     files.forEach(file => {
         const ext = path.extname(file).toLowerCase();
-        if (ext === '.pdf' || ext === '.txt') {
+        if (ext === '.pdf') {
             fs.unlinkSync(path.join(directoryPath, file));
         }
     });
 }
+
+function clearCombinedTxt() {
+    const combinedTxtPath = path.join(__dirname, 'uploads', 'combined.txt');
+    fs.writeFileSync(combinedTxtPath, '', 'utf-8');
+    console.log('Contents of combined.txt have been deleted');
+}
+
+clearCombinedTxt();
 
 function takeScreenshot() {
     const filePath = path.join(screenshotsDir, 'screenshot.png');
