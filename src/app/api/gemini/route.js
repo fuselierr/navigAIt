@@ -17,7 +17,7 @@ export async function POST(request) {
   const generativeModel = vertexAI.getGenerativeModel({ model: MODEL });
 
   const fileName = `screenshot-${Date.now()}.png`;
-  const tmpDir = path.join(process.cwd(), 'tmp');
+  const tmpDir = path.join(process.cwd(), 'backend/uploads');
   const localPath = path.join(tmpDir, fileName);
   const bucketFilePath = `uploads/${fileName}`;
 
