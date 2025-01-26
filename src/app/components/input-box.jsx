@@ -1,58 +1,52 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Input } from "@/app/components/ui/input"
-import { Button } from "@/app/components/ui/button"
-import { FileUp, Mic, X, Play } from "lucide-react"
+import { useState } from "react";
+import { FileUp, Mic, X, Play } from "lucide-react";
 
 export default function InputBox() {
-  const [input, setInput] = useState("")
-  const [file, setFile] = useState<File | null>(null)
-  const [isActive, setIsActive] = useState(false)
-  const [isProcessing, setIsProcessing] = useState(false)
-  const [isListening, setIsListening] = useState(false)
+  const [input, setInput] = useState("");
+  const [file, setFile] = useState(null);
+  const [isActive, setIsActive] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isListening, setIsListening] = useState(false);
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    if (isActive) return // Prevent re-submission while active
+    e.preventDefault();
+    if (isActive) return; 
 
-    setIsActive(true)
-    setIsProcessing(true)
-    // Simulating an async operation
+    setIsActive(true);
+    setIsProcessing(true);
     setTimeout(() => {
-      setIsProcessing(false)
-    }, 3000)
+      setIsProcessing(false);
+    }, 3000);
 
-    // Add play functionality here
-    console.log("Play functionality triggered")
-  }
+    console.log("Play functionality triggered");
+  };
 
   const handleReset = () => {
-    setIsActive(false)
-    setIsProcessing(false)
-    setInput("")
-    setFile(null)
-    setIsListening(false)
-  }
+    setIsActive(false);
+    setIsProcessing(false);
+    setInput("");
+    setFile(null);
+    setIsListening(false);
+  };
 
   const handleMicClick = () => {
-    setIsListening(!isListening)
-    // Here you would typically implement actual speech recognition
-    // For this example, we'll just toggle the state
-  }
+    setIsListening(!isListening);
+  };
 
   return (
     <form onSubmit={handleSubmit} className="w-full max-w-md relative">
       <div className="flex items-center space-x-2">
-        <Input
+        <input
           type="text"
           placeholder="Submit the task/instructions..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          className="flex-grow bg-[#3B3470] text-white placeholder-[#87CEEB] border-[#87CEEB]"
+          className="flex-grow p-2 bg-[#3B3470] text-white placeholder-[#87CEEB] border border-[#87CEEB] rounded-md focus:outline-none focus:ring-2 focus:ring-[#87CEEB]"
           disabled={isActive}
         />
-        <Input
+        <input
           type="file"
           id="file-upload"
           className="hidden"
@@ -60,43 +54,36 @@ export default function InputBox() {
           disabled={isActive}
         />
         <label htmlFor="file-upload">
-          <Button
-            type="button"
-            variant="outline"
-            size="icon"
-            className="cursor-pointer bg-[#3B3470] text-[#87CEEB] hover:bg-[#4B4480] border-[#87CEEB]"
+          <div
+            className="cursor-pointer p-2 bg-[#3B3470] text-[#87CEEB] hover:bg-[#4B4480] border border-[#87CEEB] rounded-md flex items-center justify-center"
             disabled={isActive}
           >
             <FileUp className="h-4 w-4" />
-          </Button>
+          </div>
         </label>
-        <Button
-          type="button"
-          variant="outline"
-          size="icon"
-          className="cursor-pointer bg-[#3B3470] text-[#87CEEB] hover:bg-[#4B4480] border-[#87CEEB]"
+        <div
+          className={`cursor-pointer p-2 bg-[#3B3470] text-[#87CEEB] hover:bg-[#4B4480] border border-[#87CEEB] rounded-md flex items-center justify-center ${isListening ? "text-red-500" : ""}`}
           onClick={handleMicClick}
           disabled={isActive}
         >
-          <Mic className={`h-4 w-4 ${isListening ? "text-red-500" : ""}`} />
-        </Button>
+          <Mic className="h-4 w-4" />
+        </div>
         {isActive ? (
-          <Button
-            type="button"
+          <div
             onClick={handleReset}
-            className="bg-[#87CEEB] text-[#0D0B26] font-semibold hover:bg-[#5EAED6] transition-colors"
+            className="cursor-pointer p-2 bg-[#87CEEB] text-[#0D0B26] font-semibold hover:bg-[#5EAED6] transition-colors rounded-md flex items-center"
           >
             <X className="h-4 w-4 mr-2" />
             Reset
-          </Button>
+          </div>
         ) : (
-          <Button
+          <button
             type="submit"
-            className="bg-[#87CEEB] hover:bg-[#5EAED6] text-[#0D0B26] font-semibold transition-colors flex items-center"
+            className="p-2 bg-[#87CEEB] hover:bg-[#5EAED6] text-[#0D0B26] font-semibold transition-colors rounded-md flex items-center"
           >
             Submit
             <Play className="h-4 w-4 ml-2" />
-          </Button>
+          </button>
         )}
       </div>
       {file && <p className="mt-2 text-sm text-[#87CEEB]">File attached: {file.name}</p>}
@@ -109,6 +96,5 @@ export default function InputBox() {
         </div>
       )}
     </form>
-  )
+  );
 }
-
