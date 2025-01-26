@@ -64,7 +64,7 @@ import fs from 'fs/promises';
 import path from 'path';
 
 async function convertImageToBase64() {
-    const filePath = path.join(process.cwd(), 'uploads', 'elephant.jpg');
+    const filePath = path.join(process.cwd(), 'uploads', 'screenshot.png');
     console.log('Reading image from:', filePath);
     try {
         const imageBuffer = await fs.readFile(filePath);
@@ -76,20 +76,18 @@ async function convertImageToBase64() {
     }
 }
 
+import { exec } from 'child_process';
+
 const speechCallback = async (stream) => {
   // Convert API result end time from seconds + nanoseconds to milliseconds
   resultEndTime =
     stream.results[0].resultEndTime.seconds * 1000 +
     Math.round(stream.results[0].resultEndTime.nanos / 1000000);
 
-  // Calculate correct time based on offset from audio sent twice
-  const correctedTime =
-    resultEndTime - bridgingOffset + streamingLimit * restartCounter;
-
   process.stdout.clearLine();
   process.stdout.cursorTo(0);
   let stdoutText = '';
-  if (stream.results[0] && stream.results[0].alternatives[0]) {
+  if (stream.results && stream.results[0] && stream.results[0].alternatives && stream.results[0].alternatives[0]) {
     stdoutText = stream.results[0].alternatives[0].transcript;
   }
 
@@ -98,17 +96,37 @@ const speechCallback = async (stream) => {
     process.stdout.write(chalk.green(`${stdoutText}\n`));
     
     try {
-      const response = await axios.post(
-        'http://localhost:3000/api/gemini',
-        {
-          imageBase64: await convertImageToBase64('./uploads/elephant.jpg'), 
-          question: stream.results[0].alternatives[0].transcript,
+      // Step 1: Send transcript and image to Gemini
+      const geminiResponse = await axios.post('http://localhost:3000/api/gemini', {
+        imageBase64: await convertImageToBase64(), // Convert image to Base64
+        question: stream.results[0].alternatives[0].transcript,
+      });
+  
+      console.log('Gemini Response:', geminiResponse.data);
+  
+      const geminiAnswer = geminiResponse.data.answer; // Extract the response text from Gemini
+  
+      // Step 2: Send Gemini's response to the Text-to-Speech API
+      const ttsResponse = await axios.post('http://localhost:3000/api/texttospeech', {
+        text: geminiAnswer, // Pass the assistant's response
+      });
+  
+      console.log('Text-to-Speech Response:', ttsResponse.data);
+  
+      const audioFilePath = ttsResponse.data.filePath; // Extract the path to the audio file
+  
+      // Step 3: Play the audio
+  
+      // Use a system tool like `ffplay` or `aplay` to play the audio
+      exec(`ffplay -nodisp -autoexit ${audioFilePath}`, (error, stdout, stderr) => {
+        if (error) {
+          console.error(`Error playing audio: ${error.message}`);
+          return;
         }
-      );
-
-      console.log('Gemini API Response:', response.data);
+        console.log('Audio played successfully');
+      });
     } catch (error) {
-      console.error('Error calling Gemini API:', error.message);
+      console.error('Error processing audio:', error.message);
     }
 
     isFinalEndTime = resultEndTime;
