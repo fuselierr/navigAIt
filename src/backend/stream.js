@@ -4,7 +4,6 @@ import axios from 'axios';
 const encoding = 'LINEAR16';
 const sampleRateHertz = 16000;
 const languageCode = 'en-US';
-const streamingLimit = 20000; // ms - set to low number for demo purposes
 
 import chalk from 'chalk';
 import { Writable } from 'stream';
@@ -55,9 +54,6 @@ function startStream() {
       }
     })
     .on('data', speechCallback);
-
-  // Restart stream when streamingLimit expires
-  setTimeout(restartStream, streamingLimit);
 }
 
 import fs from 'fs/promises';
