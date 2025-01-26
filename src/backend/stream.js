@@ -39,6 +39,7 @@ let finalRequestEndTime = 0;
 let newStream = true;
 let bridgingOffset = 0;
 let lastTranscriptWasFinal = false;
+let initialPrompt = true;
 
 function startStream() {
   // Clear current audioInput
@@ -60,7 +61,7 @@ import fs from 'fs/promises';
 import path from 'path';
 
 async function convertImageToBase64() {
-    const filePath = path.join(process.cwd(), 'uploads', 'screenshot.png');
+    const filePath = path.join(process.cwd(), 'uploads', 'screenshot.png'); // output of the user's feed
     console.log('Reading image from:', filePath);
     try {
         const imageBuffer = await fs.readFile(filePath);
@@ -96,24 +97,25 @@ const speechCallback = async (stream) => {
       const geminiResponse = await axios.post('http://localhost:3000/api/gemini', {
         imageBase64: await convertImageToBase64(), // Convert image to Base64
         question: stream.results[0].alternatives[0].transcript,
+        startNew: initialPrompt,
       });
   
-      console.log('Gemini Response:', geminiResponse.data);
-  
-      const geminiAnswer = geminiResponse.data.answer; // Extract the response text from Gemini
+      console.log('Gemini Response:', geminiResponse.data.answer);
+
+      const geminiAnswer = geminiResponse.data.answer; 
   
       // Step 2: Send Gemini's response to the Text-to-Speech API
       const ttsResponse = await axios.post('http://localhost:3000/api/texttospeech', {
-        text: geminiAnswer, // Pass the assistant's response
+        text: geminiAnswer, 
       });
   
       console.log('Text-to-Speech Response:', ttsResponse.data);
   
       const audioFilePath = ttsResponse.data.filePath; // Extract the path to the audio file
+
+      console.log(audioFilePath)
   
       // Step 3: Play the audio
-  
-      // Use a system tool like `ffplay` or `aplay` to play the audio
       exec(`ffplay -nodisp -autoexit ${audioFilePath}`, (error, stdout, stderr) => {
         if (error) {
           console.error(`Error playing audio: ${error.message}`);
@@ -122,7 +124,7 @@ const speechCallback = async (stream) => {
         console.log('Audio played successfully');
       });
     } catch (error) {
-      console.error('Error processing audio:', error.message);
+      console.error('Error processing prompt:', error.message);
     }
 
     isFinalEndTime = resultEndTime;
@@ -136,6 +138,9 @@ const speechCallback = async (stream) => {
     process.stdout.write(chalk.red(`${stdoutText}`));
 
     lastTranscriptWasFinal = false;
+  }
+  if (initialPrompt) {
+    initialPrompt = false;
   }
 };
 

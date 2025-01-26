@@ -21,7 +21,7 @@ export async function POST(request) {
 
     const requestPayload = {
       input: { text },
-      voice: { languageCode: 'en-US-Wavenet-C', name: 'en-US-Wavenet-C', ssmlGender: 'FEMALE' },
+      voice: { languageCode: 'en-US', name: 'en-US-Wavenet-C', ssmlGender: 'FEMALE' },
       audioConfig: { audioEncoding: 'MP3' }, 
     };
 
@@ -35,7 +35,7 @@ export async function POST(request) {
 
     return NextResponse.json({
       message: 'Text converted to speech successfully',
-      filePath: `/src/backend/uploads/${fileName}`,
+      filePath: `./uploads/${fileName}`,
     });
   } catch (error) {
     console.error('Error converting text to speech:', error.message);
