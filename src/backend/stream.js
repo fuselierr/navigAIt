@@ -40,8 +40,10 @@ let newStream = true;
 let bridgingOffset = 0;
 let lastTranscriptWasFinal = false;
 let initialPrompt = true;
+let isPlayingAudio = false;
 
 function startStream() {
+  if (isPlayingAudio) { return; }
   // Clear current audioInput
   audioInput = [];
   // Initiate (Reinitiate) a recognize stream
@@ -97,6 +99,7 @@ async function readFileContent() {
 import { spawn } from 'child_process';
 
 const speechCallback = async (stream) => {
+  if (isPlayingAudio) { return; }
   // Convert API result end time from seconds + nanoseconds to milliseconds
   resultEndTime =
     stream.results[0].resultEndTime.seconds * 1000 +
@@ -108,7 +111,6 @@ const speechCallback = async (stream) => {
   if (stream.results && stream.results[0] && stream.results[0].alternatives && stream.results[0].alternatives[0]) {
     stdoutText = stream.results[0].alternatives[0].transcript;
   }
-
   if (stream.results[0].isFinal) {
     // means that the silence reached its threshold and you can feed it into the model
     process.stdout.write(chalk.green(`${stdoutText}\n`));
@@ -146,10 +148,12 @@ const speechCallback = async (stream) => {
       const ffplay = spawn('ffplay', ['-i', 'pipe:0', '-autoexit', '-nodisp']);
 
       // Pipe the audio buffer into ffplay's standard input
+      isPlayingAudio = true;
       ffplay.stdin.write(audioBuffer);
       ffplay.stdin.end();
 
       ffplay.on('close', (code) => {
+        isPlayingAudio = false;
         if (code === 0) {
           console.log('Audio played successfully.');
         } else {

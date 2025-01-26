@@ -19,7 +19,6 @@ export async function POST(request) {
     const client = new SpeechClient({ projectId: PROJECT_ID });
 
     const audioContent = fs.readFileSync(filePath).toString('base64');
-
     const requestPayload = {
       audio: {
         content: audioContent,
@@ -29,7 +28,6 @@ export async function POST(request) {
         languageCode: 'en-US', 
       },
     };
-
     const [response] = await client.recognize(requestPayload);
 
     const transcription =

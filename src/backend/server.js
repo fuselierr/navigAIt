@@ -51,9 +51,8 @@ app.post('/pdf-upload', upload.array('pdfs'), async (req, res) => {
                     cleanedText: primeText(text), // Clean and process text
                 };
             })
-        ).then((processedFiles) => {
-            combineFiles(processedFiles); // Combine all the processed files and put them in uploads
-        });
+        )
+        await combineFiles(processedFiles); // Combine all the processed files and put them in uploads
 
         res.json({
             message: 'PDF files received',
