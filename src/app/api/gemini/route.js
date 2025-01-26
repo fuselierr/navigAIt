@@ -30,14 +30,14 @@ export async function POST(request) {
     if (startNew) {
       conversationHistory = [
         {
-          role: 'system',
+          role: 'user',
           text: `You are an employee onboarding assistant. You will support, supervise, and instruct the user as they 
           set up their codebase according to the provided document. They said to you the following: 
           
           ${question}
           
-          Answer that query in first-person. Keep your answer concise but detailed, in a FORMAT THAT CAN BE CONVERTED INTO SPEECH. NO lists, NO bullets, 
-          NO newlines, and NO bolded words! The text will be fed into a TTS.
+          Answer that query in first-person. Keep your answer concise and to the point, in a FORMAT THAT CAN BE CONVERTED INTO SPEECH. NO lists, NO bullets, 
+          NO newlines, NO bolded words, and NO emojies! The text will be fed into a TTS.
           You are provided with their screen if you can use it to better assist them. (Keep in mind that no part of the
             screen is relevant to your actual prompt.)`,
         }
@@ -74,31 +74,32 @@ export async function POST(request) {
 
     // Create the request payload for Vertex AI
     const requestPayload = {
-      contents: [
-        {
-          role: 'user',
-          parts: [
-            {
-              file_data: {
-                file_uri: imageUri, 
-                mime_type: 'image/png',
-              },
-            },
-            {
-              text: `You are an employee onboarding assistant. You will support, supervise, and instruct the user as they 
-              set up their codebase according to the provided document. They said to you the following: 
-              
-              ${question}
-              
-              Answer that query in first-person. Keep your answer concise but detailed, in a FORMAT THAT CAN BE CONVERTED INTO SPEECH. NO lists, NO bullets, 
-              NO newlines, and NO bolded words! The text will be fed into a TTS.
-              You are provided with their screen if you can use it to better assist them. (Keep in mind that no part of the
-                screen is relevant to your actual prompt.)`
-            }
-          ],
-        },
-      ],
+      contents: conversationHistory.map((entry) => ({
+        role: 'user',
+        parts: [
+          {
+            text: entry.text,
+          },
+        ],
+      })),
     };
+
+    if (imageUri) {
+      requestPayload.contents.push({
+        role: 'user',
+        parts: [
+          {
+            file_data: {
+              file_uri: imageUri,
+              mime_type: 'image/png',
+            },
+          },
+          {
+            text: question,
+          },
+        ],
+      });
+    }
 
     // Call the Vertex AI API
     const response = await generativeModel.generateContent(requestPayload);
@@ -111,7 +112,7 @@ export async function POST(request) {
 
     // Add the assistant response to the conversation history
     conversationHistory.push({
-      role: 'assistant',
+      role: 'user',
       text: assistantResponse,
     });
 

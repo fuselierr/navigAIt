@@ -21,8 +21,11 @@ export async function POST(request) {
 
     const requestPayload = {
       input: { text },
-      voice: { languageCode: 'en-US', name: 'en-US-Wavenet-C', ssmlGender: 'FEMALE' },
-      audioConfig: { audioEncoding: 'MP3' }, 
+      voice: { languageCode: 'en-US', name: 'en-US-Standard-E', ssmlGender: 'FEMALE' },
+      audioConfig: {
+        audioEncoding: 'MP3',
+        speakingRate: 1.5,
+      },
     };
 
     const [response] = await client.synthesizeSpeech(requestPayload);
