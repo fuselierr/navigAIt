@@ -21,10 +21,10 @@ export async function POST(request) {
   const bucketFilePath = `uploads/${fileName}`;
 
   try {
-    const { imageBase64, question, startNew } = await request.json();
+    const { imageBase64, question, startNew, pdfText } = await request.json();
 
-    if (!imageBase64 || !question) {
-      throw new Error('Missing imageBase64 or question in the request.');
+    if (!imageBase64 || !question || !pdfText) {
+      throw new Error('Missing imageBase64 or question or pdfText in the request.');
     }
     
     if (startNew) {
@@ -32,7 +32,10 @@ export async function POST(request) {
         {
           role: 'model',
           text: `You are an employee onboarding assistant. You will support, supervise, and instruct the user as they 
-          set up their codebase according to the provided document. They said to you the following: 
+          set up their codebase according to the provided document:
+          ${pdfText} 
+          
+          They said to you the following: 
           
           ${question}
           
