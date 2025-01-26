@@ -103,9 +103,12 @@ export async function POST(request) {
     const response = await generativeModel.generateContent(requestPayload);
 
     // Extract the assistant's response
-    let assistantResponse = "Please seek a mentor to help you.";
-    if (response.response.candidates[0].content) {
+    let assistantResponse;
+    try {
       assistantResponse = response.response.candidates[0].content.parts[0].text;
+    }
+    catch {
+      assistantResponse = "Please seek a mentor to help you.";
     }
 
     // Add the assistant response to the conversation history
