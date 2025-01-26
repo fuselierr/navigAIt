@@ -1,4 +1,6 @@
 
+import axios from 'axios';
+
 const encoding = 'LINEAR16';
 const sampleRateHertz = 16000;
 const languageCode = 'en-US';
@@ -58,7 +60,23 @@ function startStream() {
   setTimeout(restartStream, streamingLimit);
 }
 
-const speechCallback = stream => {
+import fs from 'fs/promises';
+import path from 'path';
+
+async function convertImageToBase64() {
+    const filePath = path.join(process.cwd(), 'uploads', 'elephant.jpg');
+    console.log('Reading image from:', filePath);
+    try {
+        const imageBuffer = await fs.readFile(filePath);
+
+        return imageBuffer.toString('base64');
+    } catch (error) {
+        console.error('Error converting image to Base64:', error);
+        throw error;
+    }
+}
+
+const speechCallback = async (stream) => {
   // Convert API result end time from seconds + nanoseconds to milliseconds
   resultEndTime =
     stream.results[0].resultEndTime.seconds * 1000 +
@@ -80,6 +98,20 @@ const speechCallback = stream => {
     // means that the silence reached its threshold and you can feed it into the model
     process.stdout.write(chalk.green(`${stdoutText}\n`));
     
+    try {
+      const response = await axios.post(
+        'http://localhost:3000/api/gemini',
+        {
+          imageBase64: await convertImageToBase64('./uploads/elephant.jpg'), 
+          question: stream.results[0].alternatives[0].transcript,
+        }
+      );
+
+      console.log('Gemini API Response:', response.data);
+    } catch (error) {
+      console.error('Error calling Gemini API:', error.message);
+    }
+
     isFinalEndTime = resultEndTime;
     lastTranscriptWasFinal = true;
   } else {
