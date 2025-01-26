@@ -5,6 +5,7 @@ import { textFromPDF, primeText } from './utils.js';
 import fs from 'fs';
 import http from 'http';
 import { Server } from 'socket.io';
+import { startRecording, stopRecording } from './stream.js';
 
 const PORT = 3001;
 const app = express();
