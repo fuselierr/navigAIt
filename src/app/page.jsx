@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useRef } from "react"
 import { Transcript } from "./Transcript"
-import { uploadPDF } from "./api/api"
+import { uploadPDF, startTranscription, stopTranscription } from "./api/api"
 
 export default function LandingPage() {
   const fileInputRef = useRef(null)
@@ -66,7 +66,7 @@ export default function LandingPage() {
               fileInputRef.current.click()
             }>📎</button>
             <button style={styles.iconButton}>🎤</button>
-            <button style={styles.submitButton}>Submit →</button>
+            <button style={styles.submitButton} onClick={startTranscription}>Submit →</button>
           </div>
         </form>
 

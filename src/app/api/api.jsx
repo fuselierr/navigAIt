@@ -43,4 +43,30 @@ export const uploadPDF = async (files) => {
   }
 }
 
-export { uploadPDF };
+// Start transcription
+const startTranscription = async () => {
+  try {
+    const response = await fetch(`http://localhost:${PORT}/transcription`, {
+      method: 'POST',
+    });
+    const data = await response.json();
+    console.log(data.message);
+  } catch (error) {
+    console.error('Error starting transcription:', error);
+  }
+};
+
+// Stop transcription
+const stopTranscription = async () => {
+  try {
+    const response = await fetch(`http://localhost:${PORT}/stop-transcription`, {
+      method: 'POST',
+    });
+    const data = await response.json();
+    console.log(data.message);
+  } catch (error) {
+    console.error('Error stopping transcription:', error);
+  }
+};
+
+export { uploadPDF, startTranscription, stopTranscription };

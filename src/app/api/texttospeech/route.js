@@ -30,15 +30,11 @@ export async function POST(request) {
 
     const [response] = await client.synthesizeSpeech(requestPayload);
 
-    const fileName = `speech-${Date.now()}.mp3`;
-    const filePath = path.join(UPLOADS_DIR, fileName);
-    fs.writeFileSync(filePath, response.audioContent, 'binary');
-
-    console.log(`Audio content written to: ${filePath}`);
+    const audioBase64 = response.audioContent.toString('base64');
 
     return NextResponse.json({
       message: 'Text converted to speech successfully',
-      filePath: `./uploads/${fileName}`,
+      audioBase64,
     });
   } catch (error) {
     console.error('Error converting text to speech:', error.message);

@@ -94,7 +94,7 @@ async function readFileContent() {
   }
 }
 
-import { exec } from 'child_process';
+import { spawn } from 'child_process';
 
 const speechCallback = async (stream) => {
   // Convert API result end time from seconds + nanoseconds to milliseconds
@@ -135,19 +135,26 @@ const speechCallback = async (stream) => {
         text: geminiAnswer, 
       });
   
-      console.log('Text-to-Speech Response:', ttsResponse.data);
+      console.log('Text-to-Speech Response:', ttsResponse.data.message);
   
-      const audioFilePath = ttsResponse.data.filePath; // Extract the path to the audio file
+      const audioBase64 = ttsResponse.data.audioBase64;
 
-      console.log(audioFilePath)
-  
-      // Step 3: Play the audio
-      exec(`ffplay -nodisp -autoexit ${audioFilePath}`, (error, stdout, stderr) => {
-        if (error) {
-          console.error(`Error playing audio: ${error.message}`);
-          return;
+      // Decode the base64 into raw PCM buffer
+      const audioBuffer = Buffer.from(audioBase64, 'base64');
+
+      // Spawn the ffplay process and specify input via pipe
+      const ffplay = spawn('ffplay', ['-i', 'pipe:0', '-autoexit', '-nodisp']);
+
+      // Pipe the audio buffer into ffplay's standard input
+      ffplay.stdin.write(audioBuffer);
+      ffplay.stdin.end();
+
+      ffplay.on('close', (code) => {
+        if (code === 0) {
+          console.log('Audio played successfully.');
+        } else {
+          console.error(`ffplay exited with code ${code}`);
         }
-        console.log('Audio played successfully');
       });
     } catch (error) {
       console.error('Error processing prompt:', error.message);
