@@ -30,7 +30,7 @@ export async function POST(request) {
     if (startNew) {
       conversationHistory = [
         {
-          role: 'user',
+          role: 'model',
           text: `You are an employee onboarding assistant. You will support, supervise, and instruct the user as they 
           set up their codebase according to the provided document. They said to you the following: 
           
@@ -73,9 +73,14 @@ export async function POST(request) {
     }
 
     // Create the request payload for Vertex AI
+
+    conversationHistory.map((entry) => (
+      console.log(entry.role),
+      console.log(entry.text)
+    )) 
     const requestPayload = {
       contents: conversationHistory.map((entry) => ({
-        role: 'user',
+        role: entry.role,
         parts: [
           {
             text: entry.text,
@@ -84,22 +89,12 @@ export async function POST(request) {
       })),
     };
 
-    if (imageUri) {
-      requestPayload.contents.push({
-        role: 'user',
-        parts: [
-          {
-            file_data: {
-              file_uri: imageUri,
-              mime_type: 'image/png',
-            },
-          },
-          {
-            text: question,
-          },
-        ],
-      });
-    }
+    requestPayload.contents[requestPayload.contents.length - 1].parts.unshift({
+      file_data: {
+        file_uri: imageUri,
+        mime_type: 'image/png',
+      },
+    });
 
     // Call the Vertex AI API
     const response = await generativeModel.generateContent(requestPayload);
@@ -112,7 +107,7 @@ export async function POST(request) {
 
     // Add the assistant response to the conversation history
     conversationHistory.push({
-      role: 'user',
+      role: 'model',
       text: assistantResponse,
     });
 

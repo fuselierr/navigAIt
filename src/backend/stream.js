@@ -99,6 +99,10 @@ const speechCallback = async (stream) => {
         question: stream.results[0].alternatives[0].transcript,
         startNew: initialPrompt,
       });
+
+      if (initialPrompt) {
+        initialPrompt = false;
+      }
   
       console.log('Gemini Response:', geminiResponse.data.answer);
 
@@ -138,9 +142,6 @@ const speechCallback = async (stream) => {
     process.stdout.write(chalk.red(`${stdoutText}`));
 
     lastTranscriptWasFinal = false;
-  }
-  if (initialPrompt) {
-    initialPrompt = false;
   }
 };
 
