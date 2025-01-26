@@ -17,10 +17,10 @@ export async function POST(request) {
   const generativeModel = vertexAI.getGenerativeModel({ model: MODEL });
 
   const fileName = `screenshot-${Date.now()}.png`;
-  const tmpDir = path.join(process.cwd(), 'backend/uploads');
+  const tmpDir = path.join(process.cwd(), 'src/backend/uploads');
   const localPath = path.join(tmpDir, fileName);
   const bucketFilePath = `uploads/${fileName}`;
-
+  
   try {
     if (!fs.existsSync(tmpDir)) {
       fs.mkdirSync(tmpDir);
