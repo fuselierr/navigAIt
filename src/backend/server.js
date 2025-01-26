@@ -1,23 +1,16 @@
 import express from 'express';
 import cors from 'cors';
 import multer from 'multer';
-import { textFromPDF, primeText } from './utils.js';
+import { textFromPDF, primeText, takeScreenshot } from './utils.js';
 import fs from 'fs';
 import http from 'http';
-import { Server } from 'socket.io';
 import { startRecording, stopRecording } from './stream.js';
 
 const PORT = 3001;
 const app = express();
 const server = http.createServer(app);
 
-const io = new Server(server, {
-    cors: {
-    origin: "http://localhost:3001",
-    methods: ["GET", "POST"],
-  },
-});
-
+let latestMessage = "";
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -85,43 +78,19 @@ app.post('/send-audio', upload.single('wav'), (req, res) => {
     res.json({ message: 'Audio file received', filePath: req.file.path });
 })
 
-// Start AI assistance protocol
-app.post('/start-assistance', (req, res) => {
-    res.json({ message: 'AI assistance started' });
-  
-    // Start listening for audio streams on Socket.io
-    io.on('connection', (socket) => {
-      console.log('A user connected for AI assistance');
-  
-      // Handle incoming audio data from the client
-      socket.on('audio', (audioChunk) => {
-        console.log('Received audio chunk');
-  
-        // Generate a unique filename for each chunk
-        const timestamp = Date.now();
-        const filename = `audio_chunk_${timestamp}.wav`;
-        const filepath = path.join('audio_chunks', filename);
-  
-        // Ensure the directory exists
-        if (!fs.existsSync('audio_chunks')) {
-          fs.mkdirSync('audio_chunks');
-        }
-  
-        // Write the audio chunk to a new WAV file
-        const fileWriter = new wav.FileWriter(filepath, {
-          sampleRate: 44100, // Adjust to match your audio stream
-          channels: 1, // Mono audio
-        });
-  
-        fileWriter.write(Buffer.from(audioChunk));
-        fileWriter.end(() => {
-          console.log(`Saved audio chunk to ${filename}`);
-        });
-      });
-  
-      // Handle disconnection
-      socket.on('disconnect', () => {
-        console.log('A user disconnected');
-      });
-    });
+app.get('/send-text', (req, res) => {
+    res.send(latestMessage);
 })
+
+app.post('/transcription', (req, res) => {
+    startRecording();
+    res.json({ message: 'Transcription received' });
+})
+
+app.post('/stop-transcription', (req, res) => {
+    stopRecording();
+    res.json({ message: 'Transcription stopped' });
+})
+
+
+setInterval(takeScreenshot, 1000);

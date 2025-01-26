@@ -2,7 +2,7 @@
 const encoding = 'LINEAR16';
 const sampleRateHertz = 16000;
 const languageCode = 'en-US';
-const streamingLimit = 10000; // ms - set to low number for demo purposes
+const streamingLimit = 20000; // ms - set to low number for demo purposes
 
 import chalk from 'chalk';
 import { Writable } from 'stream';
@@ -72,14 +72,12 @@ const speechCallback = stream => {
   process.stdout.cursorTo(0);
   let stdoutText = '';
   if (stream.results[0] && stream.results[0].alternatives[0]) {
-    stdoutText =
-      correctedTime + ': ' + stream.results[0].alternatives[0].transcript;
+    stdoutText = stream.results[0].alternatives[0].transcript;
   }
 
   if (stream.results[0].isFinal) {
     // means that the silence reached its threshold and you can feed it into the model
     process.stdout.write(chalk.green(`${stdoutText}\n`));
-    
     isFinalEndTime = resultEndTime;
     lastTranscriptWasFinal = true;
   } else {
@@ -172,7 +170,7 @@ function startRecording() {
         threshold: 0.8, // Start recording only when sound intensity 
         thresholdStart: 0.8, // Start recording when sound intensity 
         thresholdEnd: 0.7,
-        silence: 1000,
+        silence: 2000,
         keepSilence: true,
         recordProgram: 'rec', // Try also "arecord" or "sox"
     })
@@ -192,22 +190,7 @@ function startRecording() {
 }
 
 function stopRecording() {
-    recorder.stop();
-    console.log('Stopped recording');
-    if (recognizeStream) {
-        recognizeStream.end();
-    }
-    recognizeStream = null;
-    restartCounter = 0;
-    audioInput = [];
-    lastAudioInput = [];
-    resultEndTime = 0;
-    isFinalEndTime = 0;
-    finalRequestEndTime = 0;
-    newStream = true;
-    bridgingOffset = 0;
-    lastTranscriptWasFinal = false;
-    console.log('End of audio stream');
+    console.log('Audio recording stopped');
 }
 
 startRecording();

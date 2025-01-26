@@ -1,5 +1,25 @@
 import fs from 'fs';
 import pdfParse from 'pdf-parse';
+import screenshot from 'screenshot-desktop';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const screenshotsDir = path.join(__dirname, 'uploads/');
+if (!fs.existsSync(screenshotsDir)) {
+    fs.mkdirSync(screenshotsDir);
+}
+
+function takeScreenshot() {
+    const filePath = path.join(screenshotsDir, 'screenshot.png');
+    screenshot({ filename: filePath }).then((imgPath) => {
+        console.log(`Screenshot saved to ${imgPath}`);
+    }).catch((error) => {
+        console.error('Error taking screenshot', error);
+    });
+}
 
 const textFromPDF = (filePath) => {
     console.log(filePath);
@@ -29,4 +49,4 @@ const primeText = (text) => {
     return cleanedText;
 }
 
-export { textFromPDF, primeText };
+export { textFromPDF, primeText, takeScreenshot};
