@@ -85,8 +85,16 @@ export async function POST(request) {
               },
             },
             {
-              text: question, 
-            },
+              text: `You are an employee onboarding assistant. You will support, supervise, and instruct the user as they 
+              set up their codebase according to the provided document. They said to you the following: 
+              
+              ${question}
+              
+              Answer that query in first-person. Keep your answer concise but detailed, in a FORMAT THAT CAN BE CONVERTED INTO SPEECH. NO lists, NO bullets, 
+              NO newlines, and NO bolded words! The text will be fed into a TTS.
+              You are provided with their screen if you can use it to better assist them. (Keep in mind that no part of the
+                screen is relevant to your actual prompt.)`
+            }
           ],
         },
       ],
