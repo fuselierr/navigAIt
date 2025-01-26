@@ -21,6 +21,11 @@
         <input type="file" id="screenshotFile" name="screenshot" accept=".png">
         <button type="button" onclick="uploadScreenshot()">Upload Screenshot</button>
 
+    <h1>Upload audio (wav)</h1>
+    <form id="audioForm" enctype="multipart/form-data">
+        <input type="file" id="audioFile" name="audio" accept=".wav">
+        <button type="button" onclick="uploadAudio()">Upload Audio</button>
+
     <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
   <script>
     let socket;
@@ -48,6 +53,7 @@
         console.error('Error uploading PDF:', error);
       }
     };
+    
     const startAI = async () => {
       try {
         const response = await fetch('http://localhost:3001/start-assistance', {
@@ -111,6 +117,30 @@
         alert(`Response: ${JSON.stringify(result)}`);
       } catch (error) {
         console.error('Error uploading screenshot:', error);
+      }
+    }
+
+    const uploadAudio = async () => {
+      try {
+        const formData = new FormData();
+        const file = document.getElementById('audioFile').files[0];
+
+        if (!file) {
+          alert('Please select an audio file!');
+          return;
+        }
+
+        formData.append('wav', file);
+
+        const response = await fetch('http://localhost:3001/send-audio', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const result = await response.json();
+        alert(`Response: ${JSON.stringify(result)}`);
+      } catch (error) {
+        console.error('Error uploading audio:', error);
       }
     }
   </script>

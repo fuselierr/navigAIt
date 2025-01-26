@@ -10,7 +10,12 @@ const PORT = 3001;
 const app = express();
 const server = http.createServer(app);
 
-const io = new Server(server);
+const io = new Server(server, {
+    cors: {
+    origin: "http://localhost:3001",
+    methods: ["GET", "POST"],
+  },
+});
 
 
 app.use(express.json());
@@ -69,6 +74,14 @@ app.post('/screenshots', upload.single('screenshot'), (req, res) => {
         return res.status(400).json({ message: 'No screenshot file present' });
     }
     res.json({ message: 'Screenshot file received', filePath: req.file.path });
+})
+
+// Audio testing for Gemini
+app.post('/send-audio', upload.single('wav'), (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({ message: 'No audio file present' });
+    }
+    res.json({ message: 'Audio file received', filePath: req.file.path });
 })
 
 // Start AI assistance protocol
