@@ -256,7 +256,7 @@ function startRecording() {
         threshold: 0.8, // Start recording only when sound intensity 
         thresholdStart: 0.8, // Start recording when sound intensity 
         thresholdEnd: 0.7,
-        silence: 2000,
+        silence: 2500,
         keepSilence: true,
         recordProgram: 'rec', // Try also "arecord" or "sox"
     })
