@@ -25,7 +25,7 @@ function deletePDFs() {
 
 function clearCombinedTxt() {
     const combinedTxtPath = path.join(__dirname, 'uploads', 'combined.txt');
-    fs.writeFileSync(combinedTxtPath, '', 'utf-8');
+    fs.writeFileSync(combinedTxtPath, '.', 'utf-8');
     console.log('Contents of combined.txt have been deleted');
 }
 
