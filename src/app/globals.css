@@ -1,21 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0d0b26;
+    --foreground: #ffffff;
+    --card: #1a1744;
+    --card-foreground: #ffffff;
+    --popover: #1a1744;
+    --popover-foreground: #ffffff;
+    --primary: #87ceeb;
+    --primary-foreground: #0d0b26;
+    --secondary: #3b3470;
+    --secondary-foreground: #ffffff;
+    --muted: #3b3470;
+    --muted-foreground: #9ca3af;
+    --accent: #87ceeb;
+    --accent-foreground: #0d0b26;
+    --destructive: #ff4a4a;
+    --destructive-foreground: #ffffff;
+    --border: #87ceeb;
+    --input: #3b3470;
+    --ring: #87ceeb;
+    --radius: 0.5rem;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
 }
+
+.two-tone-bg {
+  background: linear-gradient(to right, #0d0b26 50%, #1a1744 50%);
+  position: relative;
+  overflow: hidden;
+}
+
+.two-tone-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(135, 206, 235, 0.05) 0%, rgba(135, 206, 235, 0.05) 100%),
+    linear-gradient(135deg, rgba(135, 206, 235, 0.05) 0%, rgba(135, 206, 235, 0.05) 100%);
+  background-size: 400% 400%, 300% 300%;
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%, 100% 50%;
+  }
+  50% {
+    background-position: 100% 50%, 0% 50%;
+  }
+  100% {
+    background-position: 0% 50%, 100% 50%;
+  }
+}
+
+.font-sans {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
