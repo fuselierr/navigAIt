@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import multer from 'multer';
-import { textFromPDF } from './utils.js';
+import { textFromPDF, primeText } from './utils.js';
 import fs from 'fs';
 import http from 'http';
 import { Server } from 'socket.io';
@@ -45,7 +45,8 @@ app.post('/pdf-upload', upload.single('pdf'), (req, res) => {
     }
     const filePath = req.file.path;
     textFromPDF(filePath).then(text => {
-        res.json({ message: 'PDF file received', text });
+        const cleanedText = primeText(text);
+        res.json({ message: 'PDF file received', cleanedText });
     }).catch(error => {
         res.status(400).json({ message: 'Error reading PDF file', error });
     });
