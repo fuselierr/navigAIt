@@ -1,10 +1,11 @@
 import express from 'express';
 import cors from 'cors';
 import multer from 'multer';
-import { textFromPDF, primeText, takeScreenshot } from './utils.js';
+import { textFromPDF, primeText, takeScreenshot, deletePDFs, combineFiles } from './utils.js';
 import fs from 'fs';
 import http from 'http';
-import { startRecording, stopRecording } from './stream.js';
+import path from 'path';
+//import { startRecording, stopRecording } from './stream.js';
 
 const PORT = 3001;
 const app = express();
@@ -15,6 +16,8 @@ let latestMessage = "";
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+
+deletePDFs(); // Delete any existing PDFs
 
 // multer storage for pdf
 const storage = multer.diskStorage({
@@ -37,19 +40,31 @@ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 })
 
-// Get uploaded pdf file from frontend
-app.post('/pdf-upload', upload.single('pdf'), (req, res) => {
-    if (!req.file) {
-        return res.status(400).json({ message: 'No file uploaded' });
+app.post('/pdf-upload', upload.array('pdfs'), async (req, res) => {
+    if (!req.files || req.files.length === 0) {
+        return res.status(400).json({ message: 'No files uploaded' });
     }
-    const filePath = req.file.path;
-    textFromPDF(filePath).then(text => {
-        const cleanedText = primeText(text);
-        res.json({ message: 'PDF file received', cleanedText });
-    }).catch(error => {
-        res.status(400).json({ message: 'Error reading PDF file', error });
-    });
-})
+    try {
+        const processedFiles = await Promise.all(
+            req.files.map(async (file) => {
+                const text = await textFromPDF(file.path); // Extract text from PDF
+                return {
+                    originalName: file.originalname,
+                    cleanedText: primeText(text), // Clean and process text
+                };
+            })
+        ).then((processedFiles) => {
+            combineFiles(processedFiles); // Combine all the processed files and put them in uploads
+        });
+
+        res.json({
+            message: 'PDF files received',
+            processedFiles, // Send the cleaned text for each uploaded file
+        });
+    } catch (error) {
+        res.status(400).json({ message: 'Error processing PDF files', error });
+    }
+});
 
 // Send tts response from llm
 app.get('/send-audio', (req, res) => {
@@ -83,14 +98,12 @@ app.get('/send-text', (req, res) => {
 })
 
 app.post('/transcription', (req, res) => {
-    startRecording();
+    //startRecording();
+    //setInterval(takeScreenshot, 1000);
     res.json({ message: 'Transcription received' });
 })
 
 app.post('/stop-transcription', (req, res) => {
-    stopRecording();
+    //stopRecording();
     res.json({ message: 'Transcription stopped' });
 })
-
-
-setInterval(takeScreenshot, 1000);

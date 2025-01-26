@@ -1,13 +1,28 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import { Transcript } from "./Transcript"
+import { uploadPDF } from "./api/api"
 
 export default function LandingPage() {
+  const fileInputRef = useRef(null)
+  const [fileNames, setFileNames] = useState([]);
+
   const handleSubmit = (e) => {
     e.preventDefault()
     // Handle form submission
   }
+
+  const handleFileUpload = (e) => {
+    e.preventDefault(); // Prevent default form submission
+    const files = fileInputRef.current.files;
+    if (files && files.length > 0) {
+      setFileNames(Array.from(files).map(file => file.name))
+      uploadPDF(files);
+    } else {
+      alert('No files selected!');
+    }
+  };
 
   return (
     <div style={styles.container}>
@@ -39,11 +54,32 @@ export default function LandingPage() {
         <form onSubmit={handleSubmit} style={styles.form}>
           <input type="text" placeholder="Submit the task/instructions..." style={styles.input} />
           <div style={styles.buttonGroup}>
-            <button style={styles.iconButton}>📎</button>
+          <input 
+            type="file" 
+            ref={fileInputRef} 
+            accept=".pdf" 
+            multiple 
+            style={{ display: 'none' }} 
+            onChange={handleFileUpload}
+          />
+            <button style={styles.iconButton} onClick={() => 
+              fileInputRef.current.click()
+            }>📎</button>
             <button style={styles.iconButton}>🎤</button>
             <button style={styles.submitButton}>Submit →</button>
           </div>
         </form>
+
+        {fileNames.length > 0 && (
+          <div style={styles.fileList}>
+            <h3>Selected Files:</h3>
+            <ul>
+              {fileNames.map((fileName, index) => (
+                <li key={index}>{fileName}</li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         <section style={styles.transcriptSection}>
           <h2 style={styles.subtitle}>Transcript</h2>

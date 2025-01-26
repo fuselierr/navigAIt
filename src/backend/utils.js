@@ -12,6 +12,17 @@ if (!fs.existsSync(screenshotsDir)) {
     fs.mkdirSync(screenshotsDir);
 }
 
+function deletePDFs() {
+    const directoryPath = path.join(__dirname, 'uploads/');
+    const files = fs.readdirSync(directoryPath);
+    files.forEach(file => {
+        const ext = path.extname(file).toLowerCase();
+        if (ext === '.pdf' || ext === '.txt') {
+            fs.unlinkSync(path.join(directoryPath, file));
+        }
+    });
+}
+
 function takeScreenshot() {
     const filePath = path.join(screenshotsDir, 'screenshot.png');
     screenshot({ filename: filePath }).then((imgPath) => {
@@ -38,6 +49,21 @@ const textFromPDF = (filePath) => {
     });
 }
 
+const combineFiles = (processedFiles) => {
+    let combinedText = '';
+    processedFiles.forEach(file => {
+        combinedText += `File: ${file.cleanedText}\n\n`;
+    });
+
+    fs.writeFile(path.join(__dirname, 'uploads', 'combined.txt'), combinedText, (err) => {
+        if (err) {
+            console.error('Error writing combined file:', err);
+        } else {
+            console.log('Combined file written successfully');
+        }
+    });
+}
+
 const primeText = (text) => {
     //const stopwords = ['i','me','my','myself','we','our','ours','ourselves','you','your','yours','yourself','yourselves','he','him','his','himself','she','her','hers','herself','it','its','itself','they','them','their','theirs','themselves','what','which','who','whom','this','that','these','those','am','is','are','was','were','be','been','being','have','has','had','having','do','does','did','doing','a','an','the','and','but','if','or','because','as','until','while','of','at','by','for','with','about','against','between','into','through','during','before','after','above','below','to','from','up','down','in','out','on','off','over','under','again','further','then','once','here','there','when','where','why','how','all','any','both','each','few','more','most','other','some','such','no','nor','not','only','own','same','so','than','too','very','s','t','can','will','just','don','should','now']
     // Remove newlines and weird characters
@@ -49,4 +75,4 @@ const primeText = (text) => {
     return cleanedText;
 }
 
-export { textFromPDF, primeText, takeScreenshot};
+export { textFromPDF, primeText, takeScreenshot, deletePDFs, combineFiles};
