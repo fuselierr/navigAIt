@@ -73,6 +73,11 @@ async function convertImageToBase64() {
     }
 }
 
+
+import { textFromPDF } from './utils.js';
+
+const pdfText = await textFromPDF('./uploads/onboarding.pdf');
+
 import { exec } from 'child_process';
 
 const speechCallback = async (stream) => {
@@ -98,6 +103,7 @@ const speechCallback = async (stream) => {
         imageBase64: await convertImageToBase64(), // Convert image to Base64
         question: stream.results[0].alternatives[0].transcript,
         startNew: initialPrompt,
+        pdfText: pdfText,
       });
 
       if (initialPrompt) {
