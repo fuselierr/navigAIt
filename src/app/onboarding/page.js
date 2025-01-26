@@ -1,29 +1,34 @@
 'use client';
 import { useState } from 'react';
 import { useGemini } from '@/hooks/useGemini';
-import html2canvas from 'html2canvas';
 
 export default function OnboardingAssistant() {
   const [question, setQuestion] = useState('');
-  const [screenshot, setScreenshot] = useState(null);
+  const [image, setImage] = useState(null);
   const [answer, setAnswer] = useState('');
   const { askGemini, loading, error } = useGemini();
 
-  const handleCapture = async () => {
-    const canvas = await html2canvas(document.documentElement);
-    const base64 = canvas.toDataURL('image/png').split(',')[1];
-    setScreenshot(base64);
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64Image = reader.result.split(',')[1];
+        setImage(base64Image);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!question || !screenshot) {
-      alert('Please ask a question and capture your screen');
+    if (!question || !image) {
+      alert('Please upload an image and enter a question');
       return;
     }
 
-    const response = await askGemini(question, screenshot);
+    const response = await askGemini(question, image);
 
     if (response.error) {
       console.error('API Error:', response.error);
@@ -36,15 +41,20 @@ export default function OnboardingAssistant() {
     <div className="onboarding-assistant">
       <h1>Onboarding Helper</h1>
 
-      {/* Screen Capture */}
-      <div className="screenshot-section">
-        <button onClick={handleCapture} disabled={loading}>
-          {loading ? 'Capturing...' : 'Capture Screen'}
-        </button>
-        {screenshot && (
+      {/* Image Upload */}
+      <div className="image-upload-section">
+        <label htmlFor="imageUpload">Upload an Image:</label>
+        <input
+          id="imageUpload"
+          type="file"
+          accept="image/*"
+          onChange={handleImageUpload}
+          disabled={loading}
+        />
+        {image && (
           <img
-            src={`data:image/png;base64,${screenshot}`}
-            alt="Captured screen"
+            src={`data:image/png;base64,${image}`}
+            alt="Uploaded"
             className="preview-image"
           />
         )}

@@ -22,18 +22,15 @@ export async function POST(request) {
   const bucketFilePath = `uploads/${fileName}`;
 
   try {
-    // Ensure the tmp directory exists
     if (!fs.existsSync(tmpDir)) {
       fs.mkdirSync(tmpDir);
     }
 
-    // Write the image to a local file
     const imageBuffer = Buffer.from(imageBase64, 'base64');
     fs.writeFileSync(localPath, imageBuffer);
 
     console.log(`Image saved locally at: ${localPath}`);
 
-    // Upload the file to Google Cloud Storage
     await storage.bucket(BUCKET_NAME).upload(localPath, {
       destination: bucketFilePath,
       metadata: { contentType: 'image/png' },
@@ -42,7 +39,6 @@ export async function POST(request) {
     const fileUri = `gs://${BUCKET_NAME}/${bucketFilePath}`;
     console.log(`File uploaded to: ${fileUri}`);
 
-    // Create the request payload
     const requestPayload = {
       contents: [
         {
@@ -62,18 +58,15 @@ export async function POST(request) {
       ],
     };
 
-    // Call Vertex AI API
     const response = await generativeModel.generateContent(requestPayload);
 
-    console.log('Response:', response);
-    const answer = response.candidates[0].content.parts[0].text;
+    const answer = response.response.candidates[0].content.parts[0].text;
 
     return NextResponse.json({ answer });
   } catch (error) {
     console.error('Error:', error.message);
     return NextResponse.json({ error: error.message }, { status: 500 });
   } finally {
-    // Cleanup: Delete the local file
     if (fs.existsSync(localPath)) {
       fs.unlinkSync(localPath);
     }
